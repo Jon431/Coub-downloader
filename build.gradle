@@ -1,0 +1,38 @@
+plugins {
+    id "application"
+    id 'java'
+}
+
+apply plugin: 'application'
+
+application {
+    mainClass.set("com.coubdownloader.Main")
+}
+
+group 'com.coubdownloaderutil'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+task buildFatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'com.coubdownloader.Main'
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+dependencies {
+    implementation group: 'org.springframework', name: 'spring-web', version: '5.3.22'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.3'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.18.0'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+    implementation group: 'commons-cli', name: 'commons-cli', version: '1.5.0'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
+    annotationProcessor "org.projectlombok:lombok:1.18.24"
+}
+
+
