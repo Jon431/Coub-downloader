@@ -36,7 +36,7 @@ public class Main {
     }
 
     private void fillParams() {
-        log.error("Welcome to Coub like downloader utility. It will help to export all your liked videos from site coub.com");
+        log.info("Welcome to Coub like downloader utility. It will help to export all your liked videos from site coub.com");
         log.info("Please specify access token for coub.com:");
 
         Scanner scanner = new Scanner(System.in);
